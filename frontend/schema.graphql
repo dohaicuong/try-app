@@ -1,0 +1,68 @@
+type BaseError implements Error {
+  message: String!
+}
+
+interface Error {
+  message: String!
+}
+
+input LoginInput {
+  password: String!
+  username: String!
+}
+
+type LoginPayload {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  login(input: LoginInput!): MutationLoginResult!
+  signup(input: SignupInput!): MutationSignupResult!
+}
+
+union MutationLoginResult = MutationLoginSuccess | WrongCredentialsError
+
+type MutationLoginSuccess {
+  data: LoginPayload!
+}
+
+union MutationSignupResult = MutationSignupSuccess | UserExistError
+
+type MutationSignupSuccess {
+  data: SignupPayload!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Query {
+  """User with jwt"""
+  me: User
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+}
+
+input SignupInput {
+  password: String!
+  username: String!
+}
+
+type SignupPayload {
+  token: String!
+  user: User!
+}
+
+type User implements Node {
+  id: ID!
+  username: String!
+}
+
+type UserExistError implements Error {
+  message: String!
+}
+
+type WrongCredentialsError implements Error {
+  message: String!
+}
