@@ -14,8 +14,6 @@ const Home = () => {
 
   const { enqueueSnackbar } = useSnackbar()
 
-  console.log(data.me?.id)
-
   return (
     <>
       Home

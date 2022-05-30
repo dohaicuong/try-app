@@ -2,7 +2,7 @@ import { Environment, FetchFunction, Network, RecordSource, Store, Variables } f
 import { RelayEnvironmentProvider } from 'react-relay'
 
 const fetchGraphQL = async (query: string, variables: Variables) => {
-  return fetch('http://0.0.0.0:4000/graphql', {
+  return fetch(import.meta.env.VITE_GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
